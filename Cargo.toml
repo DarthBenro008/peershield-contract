@@ -1,0 +1,29 @@
+[package]
+name = "peershield"
+version = "0.14.2"
+authors = ["Hemanth Krishna <hey@benro.dev>"]
+edition = "2018"
+description = "An Insurance contract"
+license = "MIT"
+repository = "https://github.com/DarthBenro008/peershield"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+backtraces = ["cosmwasm-std/backtraces"]
+# use library feature to disable all instantiate/execute/query exports
+library = []
+
+[dependencies]
+cw-utils = "0.16.0"
+cw2 = "0.16.0"
+cw20 = "0.16.0"
+cosmwasm-std = "1.1.5"
+cw-storage-plus = "0.16.0"
+cosmwasm-schema = "1.1.5"
+thiserror = "1.0.31"
+
+[dev-dependencies]
+cw-multi-test = "0.16.0"
+cw20-base = { version = "0.16.0", features = ["library"] }
