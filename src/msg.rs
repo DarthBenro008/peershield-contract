@@ -33,6 +33,12 @@ pub enum ExecuteMsg {
     },
     /// This accepts a properly-encoded ReceiveMsg from a cw20 contract
     Receive(Cw20ReceiveMsg),
+    /// Claim puts a message for claim request
+    Claim {
+        /// id is a human-readable name for the insurance from create
+        id: String,
+    },
+    ProvideCoverage {},
 }
 
 #[cw_serde]
@@ -42,6 +48,7 @@ pub enum ReceiveMsg {
     TopUp {
         id: String,
     },
+    ProvideCoverage {},
 }
 
 #[cw_serde]
@@ -50,7 +57,7 @@ pub struct CreateMsg {
     /// 3-20 bytes of utf-8 text
     pub id: String,
     /// arbiter can decide to approve or refund the insurance
-    pub arbiter: String,
+    ///pub arbiter: String,
     /// if approved, funds go to the recipient
     pub recipient: Option<String>,
     /// Title of the insurance
@@ -97,12 +104,27 @@ pub enum QueryMsg {
     /// Return type: DetailsResponse.
     #[returns(DetailsResponse)]
     Details { id: String },
+    #[returns(ClaimRequestsResponse)]
+    ListClaims {},
+    #[returns(CoveragePoolViewResponse)]
+    ListCoveragePool {},
 }
 
 #[cw_serde]
 pub struct ListResponse {
     /// list all registered ids
     pub insurances: Vec<String>,
+}
+
+#[cw_serde]
+pub struct ClaimRequestsResponse {
+    /// List all claims that are made
+    pub insurances: Vec<String>,
+}
+
+#[cw_serde]
+pub struct CoveragePoolViewResponse {
+    pub pool: Vec<Coin>,
 }
 
 #[cw_serde]

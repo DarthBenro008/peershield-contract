@@ -1,6 +1,7 @@
 use cosmwasm_schema::cw_serde;
 
 use cosmwasm_std::{Addr, Coin, Env, Order, StdResult, Storage, Timestamp};
+use cw_storage_plus::Item;
 use cw_storage_plus::Map;
 
 use cw20::{Balance, Cw20CoinVerified};
@@ -44,6 +45,10 @@ impl GenericBalance {
                 }
             }
         };
+    }
+
+    pub fn remove_tokens(&mut self, amount: cosmwasm_std::Uint128) {
+        self.native[0].amount -= amount
     }
 }
 
@@ -94,11 +99,25 @@ impl Insurance {
     }
 }
 
-pub const INSURANCES: Map<&str, Insurance> = Map::new("Insurance");
+#[cw_serde]
+pub struct CoveragePool {
+    pub pool: GenericBalance,
+}
+
+pub const INSURANCES: Map<&str, Insurance> = Map::new("insurance");
+pub const CLAIMS_REQUESTS: Map<&str, String> = Map::new("approvals");
+pub const COVERAGE_POOL: Item<CoveragePool> = Item::new("coverage_pool");
 
 /// This returns the list of ids for all registered insurances
 pub fn all_insurance_ids(storage: &dyn Storage) -> StdResult<Vec<String>> {
     INSURANCES
+        .keys(storage, None, None, Order::Ascending)
+        .collect()
+}
+
+/// This returns all the approvals
+pub fn all_claim_requests(storage: &dyn Storage) -> StdResult<Vec<String>> {
+    CLAIMS_REQUESTS
         .keys(storage, None, None, Order::Ascending)
         .collect()
 }

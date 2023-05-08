@@ -23,4 +23,7 @@ pub enum ContractError {
 
     #[error("Recipient is not set")]
     RecipientNotSet {},
+
+    #[error("Coverage Pool doesn't have funds to cover")]
+    InsufficientCover {},
 }
