@@ -42,6 +42,11 @@ Current risks involved with liquidity provisioning on a DEX, for example Osmosis
 
 The Peershield v1 will allow users to buy coverage for their risks involved with liquidity provisioning and in return will have to pay part of their LP rewards as premiums.
 
+
+## Proof of concept
+
+[![PeerShield PoC](https://res.cloudinary.com/marcomontalbano/image/upload/v1683592208/video_to_markdown/images/youtube--hfi01l2MLBk-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/hfi01l2MLBk "PeerShield PoC")
+
 ## Challenges we ran into
 - Cosmos Techstack On-boarding: Most of the team has background in building solutions on EVM chains and kickstarting development on the Cosmos techstack was a little painful majorly due to lack of coherent  and comprehensive resources.
 - Time Management: We wanted to build a PoC that covers the in-protocol interactions end-to-end but majority of our time went into research and mechanism flows leaving little time for PoC.
